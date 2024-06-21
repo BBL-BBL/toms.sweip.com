@@ -2,6 +2,9 @@
 
 namespace TomsSweip;
 
+// 在 BasicData.php 文件顶部添加
+require_once 'TomsSweip.php';
+
 class OrderModule extends TomsSweip
 {
     public function __construct($token, $key)
