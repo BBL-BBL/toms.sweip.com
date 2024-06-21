@@ -1,0 +1,17 @@
+{
+    "name": "bbl_bbl_bbl/toms.sweip.com",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wujie",
+            "email": "wujie812@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TomsSweip\\": "src/"
+        }
+    },
+    "require": {}
+}
