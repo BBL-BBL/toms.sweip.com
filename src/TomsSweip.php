@@ -102,10 +102,7 @@ XML;
             $response = curl_exec($curl);
 
             $reference_no = $this->params['reference_no'] ?? "toms-sweip-logs";
-            file_put_contents("{$reference_no}.log", date("Y-m-d H:i:s"), FILE_APPEND);
-            file_put_contents("{$reference_no}.log", $this->url, FILE_APPEND);
-            file_put_contents("{$reference_no}.log", $body, FILE_APPEND);
-            file_put_contents("{$reference_no}.log", $response + "\n", FILE_APPEND);
+            file_put_contents("{$reference_no}.log", date("Y-m-d H:i:s") + "\n" + $wsdl + "\n" + $body + "\n" + $response + "\n", FILE_APPEND);
 
             if (!$response) {
                 $error = curl_error($curl); // 获取 cURL 错误信息
