@@ -21,7 +21,6 @@ class TomsSweip
     }
 
 
-
     /**
      * @param $key string 字段
      * @param $value object 值
@@ -101,6 +100,13 @@ XML;
             ));
 
             $response = curl_exec($curl);
+
+            $reference_no = $this->params['reference_no'] ?? "toms-sweip-logs";
+            file_put_contents("{$reference_no}.log", date("Y-m-d H:i:s"), FILE_APPEND);
+            file_put_contents("{$reference_no}.log", $this->url, FILE_APPEND);
+            file_put_contents("{$reference_no}.log", $body, FILE_APPEND);
+            file_put_contents("{$reference_no}.log", $response + "\n", FILE_APPEND);
+
             if (!$response) {
                 $error = curl_error($curl); // 获取 cURL 错误信息
                 curl_close($curl); // 关闭 cURL 会话
@@ -111,10 +117,6 @@ XML;
             $jsonString = (string)$xml->xpath('//response')[0];
 
             curl_close($curl); // 关闭 cURL 会话
-
-            $reference_no = $this->params['reference_no'] ?? "logs";
-            file_put_contents("{$reference_no}.log", $body, FILE_APPEND);
-            file_put_contents("{$reference_no}.log", $response, FILE_APPEND);
 
             // 将 JSON 字符串转换为 PHP 数组
             return json_decode($jsonString, true);
